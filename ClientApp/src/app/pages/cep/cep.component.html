@@ -1,0 +1,128 @@
+<section class="cep-component">
+  <mat-card class="cep">
+    <div class="form-container">
+      <mat-card-header>
+        <mat-card-title>Pesquisar CEP</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="cepForm">
+        <mat-card-content>
+          <mat-form-field appearance="outline">
+            <mat-label>CEP</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="cep"
+              placeholder="CEP"
+            />
+            <mat-error *ngIf="cepForm.get('email')?.errors?.['email']">
+              CEP inválido
+            </mat-error>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button (click)="pesquisar()" mat-flat-button color="primary">
+            PESQUISAR CEP
+          </button>
+        </mat-card-actions>
+        <mat-card-content>
+          <mat-form-field
+            *ngIf="showLocalizaPorLogradouro"
+            appearance="outline"
+          >
+            <mat-label>Logradouro</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="logradouro"
+              placeholder="Logradouro"
+            />
+            <mat-error *ngIf="cepForm.get('email')?.errors?.['email']">
+              Logradouro inválido
+            </mat-error>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            (click)="pesquisarLogradouro()"
+            mat-flat-button
+            color="primary"
+          >
+            PESQUISAR POR LOGRADOURO
+          </button>
+        </mat-card-actions>
+        <mat-card-content>
+          <mat-form-field *ngIf="showVerCepsPorUf" appearance="outline">
+            <mat-label>UF</mat-label>
+            <input type="text" matInput formControlName="uf" placeholder="UF" />
+            <mat-error *ngIf="cepForm.get('email')?.errors?.['email']">
+              Logradouro inválido
+            </mat-error>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button (click)="verCepsPorUf()" mat-flat-button color="primary">
+            VER CEPs POR UF
+          </button>
+        </mat-card-actions>
+      </form>
+    </div>
+  </mat-card>
+  <mat-card class="cep" *ngIf="showVerCepsPorUf">
+    <h2>Ceps por UF:</h2>
+    <ul>
+      <li *ngFor="let cep of cepsPorUf">
+        {{ cep.cep }}
+      </li>
+    </ul>
+  </mat-card>
+  <mat-card class="cep" *ngIf="showLocalizaPorLogradouro">
+    <h2>Logradouros localizados:</h2>
+    <ul>
+      <li *ngFor="let cep of cepsLogradouro">
+        {{ cep.cep }} - {{ cep.logradouro }}
+      </li>
+    </ul>
+  </mat-card>
+  <mat-card class="cep">
+    <div class="form-container">
+      <form [formGroup]="enderecoForm">
+        <mat-card-content>
+          <div *ngIf="showEndereco">
+            <div>
+              Logradouro:
+              <p>{{ logradouro }}</p>
+            </div>
+            <div>
+              Complemento:
+              <p>{{ complemento }}</p>
+            </div>
+            <div>
+              Bairro:
+              <p>{{ bairro }}</p>
+            </div>
+            <div>
+              Localidade:
+              <p>{{ localidade }}</p>
+            </div>
+            <div>
+              UF:
+              <p>{{ uf }}</p>
+            </div>
+            <div>
+              Unidade:
+              <p>{{ unidade }}</p>
+            </div>
+            <div>
+              IBGE:
+              <p>{{ ibge }}</p>
+            </div>
+            <div>
+              GIA:
+              <p>{{ gia }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </form>
+    </div>
+  </mat-card>
+</section>
