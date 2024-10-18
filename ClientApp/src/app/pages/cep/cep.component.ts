@@ -56,6 +56,7 @@ export class CepComponent implements OnInit {
           res.cep !== null && res.cep !== undefined && res.cep !== '';
         this.showLogradourosLocalizados = false;
         this.showLocalizaPorLogradouro = false;
+        this.showVerCepsPorUf = false;
         this.logradouro = res.logradouro;
         this.complemento = res.complemento;
         this.bairro = res.bairro;

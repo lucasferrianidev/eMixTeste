@@ -74,7 +74,6 @@ app.Use(async (context, next) =>
                 string queryCreateDataBase;
                 SqlConnection myConn = new SqlConnection("Server=(localdb)\\MSSQLLocalDB;Integrated Security=true");
 
-                //queryCreateDataBase = "DROP DATABASE CEP";
                 queryCreateDataBase = "CREATE DATABASE CEP ON PRIMARY " +
                     "(NAME = cep_data, " +
                     "FILENAME = 'C:\\emix\\cep.mdf', " +
@@ -90,27 +89,6 @@ app.Use(async (context, next) =>
                 {
                     myConn.Open();
                     cmdDatabase.ExecuteNonQuery();
-
-                    string queryCreateTable = @"            
-                        USE [CEP]
-                        SET ANSI_NULLS ON
-                        SET QUOTED_IDENTIFIER ON
-
-                        CREATE TABLE [dbo].[CEP] (
-                            [Id]          INT            IDENTITY (1, 1) NOT NULL,
-                            [cep]         CHAR (9)       NULL,
-                            [logradouro]  NVARCHAR (500) NULL,
-                            [complemento] NVARCHAR (500) NULL,
-                            [bairro]      NVARCHAR (500) NULL,
-                            [localidade]  NVARCHAR (500) NULL,
-                            [uf]          CHAR (2)       NULL,
-                            [unidade]     BIGINT         NULL,
-                            [ibge]        INT            NULL,
-                            [gia]         NVARCHAR (500) NULL
-                        );";
-
-                    SqlCommand cmdTable = new SqlCommand(queryCreateTable, myConn);
-                    cmdTable.ExecuteNonQuery();
                 }
                 catch (System.Exception ex)
                 {
